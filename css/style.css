@@ -1,0 +1,35 @@
+.login,.ca{
+  border-radius: 25px;
+  opacity: 0.8;
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px 10px;
+}
+input, .inputlg, .entry{
+  border-radius: 5px;
+  opacity: 0.8;
+}
+.login{
+  height: 40vh;
+}
+.loginmargin{
+  margin-top: 5vh;
+}
+.navcol{
+  background: linear-gradient(to right, #007991, #78ffd6);
+}
+.welcome{
+  background: linear-gradient(to right, #171516,#D4D8DC);
+  color: #fff;
+  padding: 1.5%;
+  margin: 0 0;
+  opacity: 0.8;
+}
+.inputlg{
+  width:90%;
+  height: 60vh;
+}
+.entry{
+  background-color: #DFC5B6;
+  width: 70%;
+}
