@@ -1,10 +1,15 @@
 <?php
 SESSION_START();
-mysql_connect("localhost","root","");
-mysql_select_db("bishal");
+// Create connection
+$conn = new mysqli("localhost", "root","");
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+ mysqli_select_db($conn,"bishal");
 if(isset($_SESSION['loginid'])) {
 $loginid=$_SESSION['loginid'];
-$res=mysql_query("select * from data where id='".@$_SESSION['loginid']."'");
+$res=mysqli_query($conn,"select * from data where id='".@$_SESSION['loginid']."'");
 // File Handling
   $date=date("d-m-Y");
 @$myFile2= "Users/$loginid/$date.txt";

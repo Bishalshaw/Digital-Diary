@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <?PHP
 SESSION_START();
-mysql_connect("localhost","root","");
- mysql_select_db("bishal");
+// Create connection
+$conn = new mysqli("localhost", "root","");
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+ mysqli_select_db($conn,"bishal");
  $msg="";$nameErr=""; $emailidErr=""; $passErr="";$cpassErr=""; $dobErr=""; $mobErr="";$emailid2Err="";$nationErr="";
  if(isset($_POST['submit']))
 	 {
@@ -77,7 +82,7 @@ if(empty($nation)){
 }
 if(($nameErr=="")&&($emailidErr=="")&&($passErr=="")&&($dobErr=="")&&($mobErr=="")&&($emailid2Err=="")&&($nationErr=="")&&($cpassErr=="")) {
 $ins="INSERT INTO `diary`(`name`,`emailid`,`pass`,`dob`,`mf`,`mob`,`emailid2`,`nation`) VALUES('$name','$emailid','$pass','$dob','$mf','$mob','$emailid2','$nation');";
-$res=mysql_query($ins);
+$res=mysqli_query($conn,$ins);
 	if($res){
 		$msg="<font color=green>Record is Successfully Added!</font>";
 		mkdir("Users/$emailid");
@@ -90,9 +95,9 @@ else{ $msg="<font color=red>Error In Record Insertion!</font>";}
 if(isset($_POST['login']))
 	 {
 	 	 $sel="select * from diary where emailid='".$_POST['userid']."' and pass='".$_POST['userpass']."'";
-	 $res=mysql_query($sel);
-	 if(mysql_num_rows($res)>0){
-		 $row=mysql_fetch_object($res);
+	 $res=mysqli_query($conn,$sel);
+	 if(mysqli_num_rows($res)>0){
+		 $row=mysqli_fetch_object($res);
 		 $_SESSION['loginid']=$row->emailid;
 		 $_SESSION['name']=$row->name;
 		 header("location:home.php");
